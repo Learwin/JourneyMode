@@ -1,0 +1,21 @@
+{
+	"modListVersion": 2,
+	"modList": [{
+		"modid": "${modId}",
+		"name": "${modName}",
+		"description": "An addon for NEI which adds Terraria's Journey Mode to Minecraft",
+		"version": "${modVersion}",
+		"mcversion": "${minecraftVersion}",
+		"url": "https://github.com/Learwin/JourneyMode",
+		"updateUrl": "",
+		"authorList": ["Learwin"],
+		"credits": "",
+		"logoFile": "",
+		"screenshots": [],
+		"parent": "",
+		"requiredMods": [],
+		"dependencies": ["NotEnoughItems"],
+		"dependants": [],
+		"useDependencyInformation": false
+	}]
+}
