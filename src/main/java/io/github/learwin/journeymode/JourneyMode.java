@@ -1,5 +1,6 @@
 package io.github.learwin.journeymode;
 
+import io.github.learwin.journeymode.common.CommonProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +17,7 @@ public class JourneyMode {
     public static final String MODID = "journeymode";
     public static final Logger LOG = LogManager.getLogger(MODID);
 
-    @SidedProxy(clientSide = "io.github.learwin.journeymode.ClientProxy", serverSide = "io.github.learwin.journeymode.CommonProxy")
+    @SidedProxy(clientSide = "io.github.learwin.journeymode.client.ClientProxy", serverSide = "io.github.learwin.journeymode.common.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
