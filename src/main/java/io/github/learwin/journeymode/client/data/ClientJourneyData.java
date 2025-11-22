@@ -11,6 +11,8 @@ public class ClientJourneyData {
 
     private static final Set<String> UNLOCKED = new HashSet<>();
 
+    private static boolean journeyModeEnabled;
+
     public static void setUnlocks(List<String> keys) {
         synchronized (UNLOCKED) {
             UNLOCKED.clear();
@@ -42,8 +44,16 @@ public class ClientJourneyData {
         return isUnlocked(getKey(stack));
     }
 
-    public static String getKey(net.minecraft.item.ItemStack stack) {
+    public static String getKey(ItemStack stack) {
         return Item.itemRegistry.getNameForObject(stack.getItem()) + ":" + stack.getItemDamage();
+    }
+
+    public static boolean getJourneyModeEnabled() {
+        return journeyModeEnabled;
+    }
+
+    public static void setJourneyModeEnabled(boolean status) {
+        journeyModeEnabled = status;
     }
 
 }

@@ -1,12 +1,21 @@
 package io.github.learwin.journeymode.nei;
 
+import codechicken.lib.config.ConfigTagParent;
+import codechicken.nei.NEIActions;
+import codechicken.nei.NEIClientConfig;
+import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
-import codechicken.nei.guihook.GuiContainerManager;
 
 public class NEIJourneyConfig implements IConfigureNEI {
 
     @Override
     public void loadConfig() {
+        ConfigTagParent tag = NEIClientConfig.global.config;
+        tag.getTag("inventory.journeymode").setDefaultValue("false");
+        API.addOption(new JourneyModeNEIOption());
+
+        NEIActions.addAction("journeymode");
+        NEIActions.smpRequired("journeymode");
 
     }
 

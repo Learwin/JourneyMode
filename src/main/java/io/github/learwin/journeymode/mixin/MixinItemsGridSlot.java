@@ -1,13 +1,15 @@
 package io.github.learwin.journeymode.mixin;
 
+import codechicken.lib.config.ConfigTag;
+import codechicken.lib.config.ConfigTagParent;
 import codechicken.lib.vec.Rectangle4i;
 import codechicken.nei.ItemsGrid;
+import codechicken.nei.NEIClientConfig;
 import io.github.learwin.journeymode.client.ClientProxy;
 import io.github.learwin.journeymode.client.data.ClientJourneyData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,23 +29,34 @@ public class MixinItemsGridSlot {
         if (item == null)
             return;
 
-        if (ClientJourneyData.isUnlocked(item)) {
-            Minecraft mc = Minecraft.getMinecraft();
-            mc.getTextureManager().bindTexture(ClientProxy.ICON);
+        ConfigTagParent tag = NEIClientConfig.global.config;
+        ConfigTag journeyModeEnabledTag = tag.getTag("inventory.journeymode");
+        if (!journeyModeEnabledTag.getBooleanValue())
+            return;
 
-            float uMin = 0f;
-            float uMax = 1f;
-            float vMin = 0f;
-            float vMax = 1f;
+        if (!ClientJourneyData.getJourneyModeEnabled())
+            return;
 
-            Tessellator tess = Tessellator.instance;
-            tess.startDrawingQuads();
-            tess.addVertexWithUV(rect.x, rect.y + 8, 300, uMin, vMax);
-            tess.addVertexWithUV(rect.x + 8, rect.y + 8, 300, uMax, vMax);
-            tess.addVertexWithUV(rect.x + 8, rect.y, 300, uMax, vMin);
-            tess.addVertexWithUV(rect.x, rect.y, 300, uMin, vMin);
-            tess.draw();
-        }
+        if (!ClientJourneyData.isUnlocked(item))
+            return;
+
+
+        Minecraft mc = Minecraft.getMinecraft();
+        mc.getTextureManager().bindTexture(ClientProxy.ICON);
+
+        float uMin = 0f;
+        float uMax = 1f;
+        float vMin = 0f;
+        float vMax = 1f;
+
+        Tessellator tess = Tessellator.instance;
+        tess.startDrawingQuads();
+        tess.addVertexWithUV(rect.x, rect.y + 8, 300, uMin, vMax);
+        tess.addVertexWithUV(rect.x + 8, rect.y + 8, 300, uMax, vMax);
+        tess.addVertexWithUV(rect.x + 8, rect.y, 300, uMax, vMin);
+        tess.addVertexWithUV(rect.x, rect.y, 300, uMin, vMin);
+        tess.draw();
+
     }
 
 }

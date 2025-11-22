@@ -4,5 +4,5 @@
   "package": "io.github.learwin.journeymode.mixin",
   "refmap": "mixins.journeymode.refmap.json",
   "target": "@env(DEFAULT)",
-  "compatibilityLevel": "JAVA_8"
+  "compatibilityLevel": "JAVA_8", "mixins": ["MixinNEIServerConfig", "MixinNEISPH"]
 }
