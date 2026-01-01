@@ -36,7 +36,10 @@ public enum Mixins implements IMixins {
         .addServerMixins("MixinNEISPH")),
 
     NEIServerConfigMixin(new MixinBuilder().setPhase(Phase.LATE)
-        .addServerMixins("MixinNEIServerConfig"));
+        .addServerMixins("MixinNEIServerConfig")),
+
+    NEIActionsMixin(new MixinBuilder().setPhase(Phase.LATE)
+        .addServerMixins("MixinNEIActions"));
 
     private final MixinBuilder builder;
 
