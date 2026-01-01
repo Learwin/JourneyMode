@@ -1,10 +1,12 @@
 package io.github.learwin.journeymode.common.event;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import io.github.learwin.journeymode.common.data.JourneyData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import io.github.learwin.journeymode.JourneyUtil;
+import io.github.learwin.journeymode.common.data.JourneyData;
 
 public class ItemPickupHandler {
 
@@ -14,7 +16,7 @@ public class ItemPickupHandler {
         ItemStack stack = event.item.getEntityItem();
 
         if (JourneyData.addUnlock(player, stack)) {
-            String key = JourneyData.getKey(stack);
+            String key = JourneyUtil.getKey(stack);
             JourneyData.sendAddUnlock(player, key);
         }
     }

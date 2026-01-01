@@ -1,13 +1,13 @@
 package io.github.learwin.journeymode.client;
 
+import static codechicken.nei.NEIClientConfig.hasSMPCounterPart;
+import static io.github.learwin.journeymode.client.data.ClientJourneyData.setJourneyModeEnabled;
+
 import codechicken.lib.packet.PacketCustom;
 import codechicken.nei.Button;
 import codechicken.nei.NEICPH;
 import io.github.learwin.journeymode.Constants;
 import io.github.learwin.journeymode.mixin.InvokerLayoutManager;
-
-import static codechicken.nei.NEIClientConfig.hasSMPCounterPart;
-import static io.github.learwin.journeymode.client.data.ClientJourneyData.setJourneyModeEnabled;
 
 public class JourneyModeButton extends Button {
 

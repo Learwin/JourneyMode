@@ -1,7 +1,5 @@
 package io.github.learwin.journeymode.nei;
 
-import codechicken.nei.api.ItemFilter;
-import codechicken.nei.api.ItemInfo;
 import net.minecraft.util.EnumChatFormatting;
 
 import codechicken.lib.config.ConfigTagParent;
@@ -32,7 +30,6 @@ public class NEIJourneyConfig implements IConfigureNEI {
                 EnumChatFormatting.GREEN,
                 JourneyUnlockItemFilter::new));
     }
-
 
     @Override
     public String getName() {

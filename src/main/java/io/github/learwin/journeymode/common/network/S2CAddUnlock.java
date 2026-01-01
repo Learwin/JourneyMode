@@ -28,6 +28,7 @@ public class S2CAddUnlock implements IMessage {
     }
 
     public static class Handler implements IMessageHandler<S2CAddUnlock, IMessage> {
+
         @Override
         public IMessage onMessage(S2CAddUnlock message, MessageContext ctx) {
             ClientJourneyData.addUnlock(message.key);

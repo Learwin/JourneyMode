@@ -1,5 +1,9 @@
 package io.github.learwin.journeymode.common.network;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -7,11 +11,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.github.learwin.journeymode.client.data.ClientJourneyData;
 import io.netty.buffer.ByteBuf;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-public class S2CFullSyncUnlocks  implements IMessage {
+public class S2CFullSyncUnlocks implements IMessage {
 
     public List<String> unlocks;
 
@@ -39,6 +39,7 @@ public class S2CFullSyncUnlocks  implements IMessage {
     }
 
     public static class Handler implements IMessageHandler<S2CFullSyncUnlocks, IMessage> {
+
         @Override
         public IMessage onMessage(S2CFullSyncUnlocks message, MessageContext ctx) {
             ClientJourneyData.setUnlocks(message.unlocks);

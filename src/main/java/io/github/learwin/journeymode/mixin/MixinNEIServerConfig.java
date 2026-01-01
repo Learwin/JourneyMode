@@ -1,9 +1,9 @@
 package io.github.learwin.journeymode.mixin;
 
-import codechicken.lib.packet.PacketCustom;
-import codechicken.nei.NEIServerConfig;
-import io.github.learwin.journeymode.Constants;
+import static codechicken.nei.NEIServerConfig.canPlayerPerformAction;
+
 import net.minecraft.entity.player.EntityPlayerMP;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,7 +11,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static codechicken.nei.NEIServerConfig.canPlayerPerformAction;
+import codechicken.lib.packet.PacketCustom;
+import codechicken.nei.NEIServerConfig;
+import io.github.learwin.journeymode.Constants;
 
 @Mixin(value = NEIServerConfig.class, remap = false)
 public class MixinNEIServerConfig {
@@ -28,7 +30,8 @@ public class MixinNEIServerConfig {
     }
 
     @Inject(method = "authenticatePacket", at = @At("HEAD"), cancellable = true)
-    private static void authenticatePacket(EntityPlayerMP sender, PacketCustom packet, CallbackInfoReturnable<Boolean> cir) {
+    private static void authenticatePacket(EntityPlayerMP sender, PacketCustom packet,
+        CallbackInfoReturnable<Boolean> cir) {
         if (packet.getType() == Constants.SEND_JOURNEY_MODE) {
             cir.setReturnValue(canPlayerPerformAction(sender.getCommandSenderName(), "journeymode"));
             cir.cancel();

@@ -1,11 +1,12 @@
 package io.github.learwin.journeymode.client.data;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import net.minecraft.item.ItemStack;
+
+import io.github.learwin.journeymode.JourneyUtil;
 
 public class ClientJourneyData {
 
@@ -39,13 +40,8 @@ public class ClientJourneyData {
     }
 
     public static boolean isUnlocked(ItemStack stack) {
-        if (stack == null)
-            return false;
-        return isUnlocked(getKey(stack));
-    }
-
-    public static String getKey(ItemStack stack) {
-        return Item.itemRegistry.getNameForObject(stack.getItem()) + ":" + stack.getItemDamage();
+        if (stack == null) return false;
+        return isUnlocked(JourneyUtil.getKey(stack));
     }
 
     public static boolean getJourneyModeEnabled() {

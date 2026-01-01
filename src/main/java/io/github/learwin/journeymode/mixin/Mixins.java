@@ -1,44 +1,41 @@
 package io.github.learwin.journeymode.mixin;
 
+import javax.annotation.Nonnull;
+
 import com.gtnewhorizon.gtnhmixins.builders.IMixins;
 import com.gtnewhorizon.gtnhmixins.builders.MixinBuilder;
-
-import javax.annotation.Nonnull;
 
 public enum Mixins implements IMixins {
     // Accessor
 
     // Invoker
-    NEILayoutStyleMinecraftInvoker(new MixinBuilder()
-        .setPhase(Phase.LATE)
+    NEILayoutStyleMinecraftInvoker(new MixinBuilder().setPhase(Phase.LATE)
         .addClientMixins("InvokerLayoutStyleMinecraft")),
 
-    NEILayoutManagerInvoker(new MixinBuilder()
-        .setPhase(Phase.LATE)
+    NEILayoutManagerInvoker(new MixinBuilder().setPhase(Phase.LATE)
         .addClientMixins("InvokerLayoutManager")),
     // Mixin
-    NEIItemsGridSlotMixin(new MixinBuilder()
-        .setPhase(Phase.LATE)
+    // Clientside
+    NEIItemsGridSlotMixin(new MixinBuilder().setPhase(Phase.LATE)
         .addClientMixins("MixinItemsGridSlot")),
 
-    NEILayoutManagerMixin(new MixinBuilder()
-        .setPhase(Phase.LATE)
+    NEILayoutManagerMixin(new MixinBuilder().setPhase(Phase.LATE)
         .addClientMixins("MixinLayoutManager")),
 
-    NEILayoutStyleMinecraftMixin(new MixinBuilder()
-        .setPhase(Phase.LATE)
+    NEILayoutStyleMinecraftMixin(new MixinBuilder().setPhase(Phase.LATE)
         .addClientMixins("MixinLayoutStyleMinecraft")),
 
-    NEICPHMixin(new MixinBuilder()
-        .setPhase(Phase.LATE)
+    NEICPHMixin(new MixinBuilder().setPhase(Phase.LATE)
         .addClientMixins("MixinNEICPH")),
 
-    NEISPHMixin(new MixinBuilder()
-        .setPhase(Phase.LATE)
+    NEIClientConfigMixin(new MixinBuilder().setPhase(Phase.LATE)
+        .addClientMixins("MixinNEIClientConfig")),
+
+    // Serverside
+    NEISPHMixin(new MixinBuilder().setPhase(Phase.LATE)
         .addServerMixins("MixinNEISPH")),
 
-    NEIServerConfigMixin(new MixinBuilder()
-        .setPhase(Phase.LATE)
+    NEIServerConfigMixin(new MixinBuilder().setPhase(Phase.LATE)
         .addServerMixins("MixinNEIServerConfig"));
 
     private final MixinBuilder builder;

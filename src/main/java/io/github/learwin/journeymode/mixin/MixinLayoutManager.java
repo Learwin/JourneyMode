@@ -1,22 +1,21 @@
 package io.github.learwin.journeymode.mixin;
 
-import codechicken.lib.config.ConfigTag;
-import codechicken.lib.config.ConfigTagParent;
-import codechicken.nei.Button;
-import codechicken.nei.LayoutManager;
-import codechicken.nei.NEIClientConfig;
-import codechicken.nei.VisiblityData;
-import io.github.learwin.journeymode.client.JourneyModeButton;
-import io.github.learwin.journeymode.intf.IJourneyButtonGetter;
+import static codechicken.nei.LayoutManager.addWidget;
+import static codechicken.nei.NEIClientConfig.canPerformAction;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static codechicken.nei.LayoutManager.addWidget;
-import static codechicken.nei.NEIClientConfig.canPerformAction;
+import codechicken.lib.config.ConfigTag;
+import codechicken.lib.config.ConfigTagParent;
+import codechicken.nei.*;
+import io.github.learwin.journeymode.client.JourneyModeButton;
+import io.github.learwin.journeymode.intf.IJourneyButtonGetter;
 
 @Mixin(value = LayoutManager.class, remap = false)
 public class MixinLayoutManager implements IJourneyButtonGetter {
@@ -36,11 +35,9 @@ public class MixinLayoutManager implements IJourneyButtonGetter {
         ConfigTagParent tag = NEIClientConfig.global.config;
         ConfigTag journeyModeEnabledTag = tag.getTag("inventory.journeymode");
 
-        if (!journeyModeEnabledTag.getBooleanValue())
-            return;
+        if (!journeyModeEnabledTag.getBooleanValue()) return;
 
-        if (canPerformAction("journeymode"))
-            addWidget(journeyMode$journeyMode);
+        if (canPerformAction("journeymode")) addWidget(journeyMode$journeyMode);
 
     }
 
@@ -48,4 +45,5 @@ public class MixinLayoutManager implements IJourneyButtonGetter {
     public Button getJourneyButton() {
         return journeyMode$journeyMode;
     }
+
 }

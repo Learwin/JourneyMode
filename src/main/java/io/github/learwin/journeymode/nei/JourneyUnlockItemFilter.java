@@ -1,10 +1,11 @@
 package io.github.learwin.journeymode.nei;
 
-import codechicken.nei.api.ItemFilter;
-import io.github.learwin.journeymode.client.data.ClientJourneyData;
+import java.util.regex.Pattern;
+
 import net.minecraft.item.ItemStack;
 
-import java.util.regex.Pattern;
+import codechicken.nei.api.ItemFilter;
+import io.github.learwin.journeymode.client.data.ClientJourneyData;
 
 public class JourneyUnlockItemFilter implements ItemFilter {
 
@@ -16,9 +17,9 @@ public class JourneyUnlockItemFilter implements ItemFilter {
 
     @Override
     public boolean matches(ItemStack item) {
-        if (!ClientJourneyData.isUnlocked(item))
-            return false;
+        if (!ClientJourneyData.isUnlocked(item)) return false;
 
-        return pattern.matcher(item.getDisplayName()).find();
+        return pattern.matcher(item.getDisplayName())
+            .find();
     }
 }

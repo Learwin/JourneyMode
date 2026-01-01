@@ -1,6 +1,5 @@
 package io.github.learwin.journeymode;
 
-import io.github.learwin.journeymode.common.CommonProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +9,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import io.github.learwin.journeymode.common.CommonProxy;
 
 @Mod(modid = JourneyMode.MODID, version = Tags.VERSION, name = "MyMod", acceptedMinecraftVersions = "[1.7.10]")
 public class JourneyMode {
@@ -17,7 +17,9 @@ public class JourneyMode {
     public static final String MODID = "journeymode";
     public static final Logger LOG = LogManager.getLogger(MODID);
 
-    @SidedProxy(clientSide = "io.github.learwin.journeymode.client.ClientProxy", serverSide = "io.github.learwin.journeymode.common.CommonProxy")
+    @SidedProxy(
+        clientSide = "io.github.learwin.journeymode.client.ClientProxy",
+        serverSide = "io.github.learwin.journeymode.common.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
