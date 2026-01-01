@@ -13,7 +13,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import codechicken.lib.config.ConfigTag;
 import codechicken.lib.config.ConfigTagParent;
-import codechicken.nei.*;
+import codechicken.nei.Button;
+import codechicken.nei.LayoutManager;
+import codechicken.nei.NEIClientConfig;
+import codechicken.nei.VisiblityData;
 import io.github.learwin.journeymode.client.JourneyModeButton;
 import io.github.learwin.journeymode.intf.IJourneyButtonGetter;
 
