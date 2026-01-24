@@ -3,6 +3,7 @@ package io.github.learwin.journeymode.nei;
 import net.minecraft.util.EnumChatFormatting;
 
 import codechicken.lib.config.ConfigTagParent;
+import codechicken.nei.NEIActions;
 import codechicken.nei.NEIClientConfig;
 import codechicken.nei.SearchField;
 import codechicken.nei.api.API;
@@ -18,6 +19,9 @@ public class NEIJourneyConfig implements IConfigureNEI {
         tag.getTag("inventory.search.journeyUnlocksSearchMode")
             .setDefaultValue("1");
         API.addOption(new JourneyModeNEIOption());
+
+        NEIActions.addAction("journeymode");
+        NEIActions.smpRequired("journeymode");
 
         API.addSearchProvider(
             new SearchField.SearchParserProvider(
