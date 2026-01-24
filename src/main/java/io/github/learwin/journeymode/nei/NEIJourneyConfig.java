@@ -1,9 +1,9 @@
 package io.github.learwin.journeymode.nei;
 
-import codechicken.nei.NEIActions;
 import net.minecraft.util.EnumChatFormatting;
 
 import codechicken.lib.config.ConfigTagParent;
+import codechicken.nei.NEIActions;
 import codechicken.nei.NEIClientConfig;
 import codechicken.nei.SearchField;
 import codechicken.nei.api.API;
