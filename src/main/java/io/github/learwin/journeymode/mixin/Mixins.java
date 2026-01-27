@@ -31,6 +31,9 @@ public enum Mixins implements IMixins {
     NEIClientConfigMixin(new MixinBuilder().setPhase(Phase.LATE)
         .addClientMixins("MixinNEIClientConfig")),
 
+    NEIDefaultOverlayHandlerMixin(new MixinBuilder().setPhase(Phase.LATE)
+        .addClientMixins("MixinDefaultOverlayHandler")),
+
     // Serverside
     NEISPHMixin(new MixinBuilder().setPhase(Phase.LATE)
         .addServerMixins("MixinNEISPH")),
@@ -39,10 +42,7 @@ public enum Mixins implements IMixins {
         .addServerMixins("MixinNEIServerConfig")),
 
     NEIActionsMixin(new MixinBuilder().setPhase(Phase.LATE)
-        .addServerMixins("MixinNEIActions")),
-
-    DefaultOverlayHandlerMixin(new MixinBuilder().setPhase(Phase.LATE)
-        .addClientMixins("MixinDefaultOverlayHandler"));
+        .addServerMixins("MixinNEIActions"));
 
     private final MixinBuilder builder;
 
