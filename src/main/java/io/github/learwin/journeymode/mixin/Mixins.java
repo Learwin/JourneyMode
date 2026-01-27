@@ -16,8 +16,8 @@ public enum Mixins implements IMixins {
         .addClientMixins("InvokerLayoutManager")),
     // Mixin
     // Clientside
-    NEIItemsGridSlotMixin(new MixinBuilder().setPhase(Phase.LATE)
-        .addClientMixins("MixinItemsGridSlot")),
+    NEIItemsGridMixin(new MixinBuilder().setPhase(Phase.LATE)
+        .addClientMixins("MixinItemsGrid")),
 
     NEILayoutManagerMixin(new MixinBuilder().setPhase(Phase.LATE)
         .addClientMixins("MixinLayoutManager")),
