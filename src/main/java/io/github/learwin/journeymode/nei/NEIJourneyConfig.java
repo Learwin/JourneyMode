@@ -1,5 +1,6 @@
 package io.github.learwin.journeymode.nei;
 
+import io.github.learwin.journeymode.client.data.ClientJourneyData;
 import net.minecraft.util.EnumChatFormatting;
 
 import codechicken.lib.config.ConfigTagParent;
@@ -29,6 +30,8 @@ public class NEIJourneyConfig implements IConfigureNEI {
                 "journeyUnlocks",
                 EnumChatFormatting.GREEN,
                 JourneyUnlockItemFilter::new));
+
+        API.addSubset("Journey Mode", ClientJourneyData::isUnlocked);
     }
 
     @Override
