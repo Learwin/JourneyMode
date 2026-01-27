@@ -1,0 +1,30 @@
+package io.github.learwin.journeymode.mixin;
+
+import codechicken.nei.NEICPH;
+import codechicken.nei.NEIServerUtils;
+import codechicken.nei.recipe.DefaultOverlayHandler;
+import io.github.learwin.journeymode.client.data.ClientJourneyData;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
+
+@Mixin(value = DefaultOverlayHandler.class, remap = false)
+public class MixinDefaultOverlayHandler {
+
+    @Inject(method = "moveIngredients", at = @At("TAIL"))
+    private void moveIngredients(GuiContainer gui, List<DefaultOverlayHandler.IngredientDistribution> assignedIngredients, int multiplier, CallbackInfo ci) {
+        if(!ClientJourneyData.getJourneyModeEnabled())
+            return;
+
+        for (var dist : assignedIngredients) {
+            if (!ClientJourneyData.isUnlocked(dist.permutation) || dist.slots[0].getHasStack())
+                continue;
+
+            NEICPH.sendSetSlot(dist.slots[0].slotNumber, NEIServerUtils.copyStack(dist.permutation, 1), true);
+        }
+    }
+}

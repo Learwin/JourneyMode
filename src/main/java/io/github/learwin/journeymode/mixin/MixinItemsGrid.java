@@ -2,9 +2,7 @@ package io.github.learwin.journeymode.mixin;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.item.ItemStack;
 
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,29 +17,38 @@ import codechicken.nei.NEIClientConfig;
 import io.github.learwin.journeymode.client.ClientProxy;
 import io.github.learwin.journeymode.client.data.ClientJourneyData;
 
-@Mixin(value = ItemsGrid.ItemsGridSlot.class, remap = false)
-public class MixinItemsGridSlot {
+import java.util.List;
 
-    @Final
-    @Shadow(remap = false)
-    public ItemStack item;
+@Mixin(value = ItemsGrid.class, remap = false)
+public abstract class MixinItemsGrid<T extends ItemsGrid.ItemsGridSlot, M extends ItemsGrid.MouseContext> {
 
-    @Inject(method = "afterDraw", at = @At("TAIL"))
-    public <M extends ItemsGrid.MouseContext> void afterDraw(Rectangle4i rect, M mouseContext, CallbackInfo ci) {
-        if (item == null) return;
+    @Shadow
+    public abstract List<T> getMask();
 
+    @Shadow
+    public abstract Rectangle4i getSlotRect(int slotIndex);
+
+    @Inject(method = "afterDrawItems", at = @At("TAIL"))
+    public <M extends ItemsGrid.MouseContext> void afterDraw(int mousex, int mousey, M mouseContext, CallbackInfo ci) {
         ConfigTagParent tag = NEIClientConfig.global.config;
         ConfigTag journeyModeEnabledTag = tag.getTag("inventory.journeymode");
         if (!journeyModeEnabledTag.getBooleanValue()) return;
 
         if (!ClientJourneyData.getJourneyModeEnabled()) return;
 
-        if (!ClientJourneyData.isUnlocked(item)) return;
-
         Minecraft mc = Minecraft.getMinecraft();
         mc.getTextureManager()
             .bindTexture(ClientProxy.ICON);
 
+        for (T slot : this.getMask()) {
+            if (!ClientJourneyData.isUnlocked(slot.getItemStack()))
+                continue;
+
+            draw_discovered(this.getSlotRect(slot.slotIndex));
+        }
+    }
+
+    private static void draw_discovered(Rectangle4i rect) {
         float uMin = 0f;
         float uMax = 1f;
         float vMin = 0f;
@@ -54,7 +61,6 @@ public class MixinItemsGridSlot {
         tess.addVertexWithUV(rect.x + 8, rect.y, 300, uMax, vMin);
         tess.addVertexWithUV(rect.x, rect.y, 300, uMin, vMin);
         tess.draw();
-
     }
 
 }
