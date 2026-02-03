@@ -15,7 +15,7 @@ import io.github.learwin.journeymode.common.network.S2CFullSyncUnlocks;
 
 public class JourneyData {
 
-    private static final String NBT_TAG = "journeyUnlocks";
+    public static final String NBT_TAG = "journeyUnlocks";
 
     public static Set<String> getUnlocks(EntityPlayer player) {
         NBTTagCompound persisted = player.getEntityData()

@@ -1,5 +1,6 @@
 package io.github.learwin.journeymode.common.event;
 
+import io.github.learwin.journeymode.common.data.JourneyTeamData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -14,11 +15,12 @@ public class ItemPickupHandler {
     public void onItemPickup(EntityItemPickupEvent event) {
         EntityPlayer player = event.entityPlayer;
         ItemStack stack = event.item.getEntityItem();
+        String key = JourneyUtil.getKey(stack);
 
-        if (JourneyData.addUnlock(player, stack)) {
-            String key = JourneyUtil.getKey(stack);
+        if (JourneyData.addUnlock(player, key)) {
             JourneyData.sendAddUnlock(player, key);
         }
+        JourneyTeamData.unlock_for_team(player, key);
     }
 
 }
