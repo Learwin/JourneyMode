@@ -25,6 +25,7 @@ public class JourneyInventoryTracker {
                     if (JourneyData.addUnlock(player, e.getKey())) {
                         JourneyData.sendAddUnlock(player, e.getKey());
                     }
+                    JourneyTeamData.unlock_for_team(player, e.getKey());
                 }
             }
         }
